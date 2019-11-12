@@ -1,0 +1,101 @@
+.Form {
+    margin-top: 32px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.Form h1 {
+    color: #eee;
+    font-size: 32px;
+    margin: 0;
+}
+
+.Form h3 {
+    margin: 64px 0 0;
+    color: #eee;
+    font-size: 20px;
+}
+
+.Form input {
+    margin: 0;
+    background-color: #222;
+    color: #eee;
+    font-size: 16px;
+    padding: 4px;
+    border: 1px solid #eee;
+    height: 28px;
+}
+
+.Form button {
+    padding: 8px;
+    font-size: 16px;
+    background-color: #eee;
+    color: #3e3e3e;
+    border: none;
+    border-radius: 2px;
+    margin: 0 0 0 16px;
+    height: 38px;
+}
+
+.Form button:hover {
+    background-color: #ccc;
+}
+
+.Form button:active {
+    background-color: #888;
+}
+
+.Search {
+    margin: 8px 0 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+}
+
+.Query {
+    margin: 8px 0 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 50%;
+    align-items: center;
+}
+
+.Field {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.Field h4 {
+    margin: 0;
+    color: #eee;
+    font-size: 18px;
+}
+
+#song {
+    margin-left: 16px;
+}
+
+.Query button {
+    align-self: flex-end;
+}
+
+@media only screen and (max-width: 600px) {
+    .Query {
+        flex-direction: column;
+    }
+    .Query button {
+        align-self: center;
+        margin: 8px 0 0;
+    }
+    #song {
+        margin-left: 0;
+    }
+}

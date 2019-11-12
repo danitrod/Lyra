@@ -1,0 +1,33 @@
+.App {
+  text-align: center;
+  top: 0;
+  left: 0;
+}
+
+.Footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #eee;
+  padding: 16px;
+}
+
+.Footer h3 {
+  font-size: 32px;
+  font-family: 'IBM Plex Sans', 'Courier New', Courier, monospace;
+  font-weight: 300;
+  margin: 0 32px 0;
+}
+
+.Footer img {
+  width: 200px;
+}
+
+@media only screen and (max-width: 600px) {
+  .Footer {
+    flex-direction: column;
+  }
+  .Footer h3 {
+    margin: 0 0 32px;
+  }
+}
