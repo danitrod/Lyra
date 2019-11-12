@@ -4,7 +4,7 @@ import classes from './Form.module.css'
 class Form extends Component {
 
     state = {
-        searchValue: "",
+        // searchValue: "",
         songValue: "",
         artistValue: "",
         err: false,
@@ -49,11 +49,11 @@ class Form extends Component {
         return (
             <div className={classes.Form}>
                 <h1>Lyra, the song analyzer</h1>
-                <h3>Search for song or artist</h3>
+                {/* <h3>Search for song or artist</h3>
                 <div className={classes.Search}>
                     <input value={this.state.searchValue} onChange={(e) => this.onSearchChangeHandler(e)} type="text" />
                     <button onClick={this.onSearchClickHandler}>Search!</button>
-                </div>
+                </div> */}
                 <h3>Query for lyric analysis!</h3>
                 <div className={classes.Query}>
                     <div className={classes.Field}>

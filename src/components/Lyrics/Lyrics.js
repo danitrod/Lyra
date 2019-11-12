@@ -13,7 +13,7 @@ class Lyrics extends Component {
                 <p>
                     {this.props.emotions !== undefined ? this.props.emotions.split('\n').map(line => {
                         return <>{line}<br /></>
-                    }) : "The analysis will appear here!"}
+                    }) : "Analysis is currently only supported in English."}
                 </p>
             </div>
         )
