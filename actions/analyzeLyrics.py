@@ -1,32 +1,71 @@
 import json
-from watson_developer_cloud import NaturalLanguageUnderstandingV1
+from watson_developer_cloud import NaturalLanguageUnderstandingV1, LanguageTranslatorV3
 from watson_developer_cloud.natural_language_understanding_v1 import Features, EmotionOptions, SentimentOptions
 
 def main(dict):
+    # Handling previous errors for sequence
+    if dict['err']:
+        return dict
+        
     try:
+        # Emotion analysis is only supported in English, in other cases, you will translate the lyrics to English with Language Translator and then analyze them
+        # Instantiating LT
+        lt = LanguageTranslatorV3(
+        version='2018-05-01',
+        # Insert Language Translator APIKEY below
+        iam_apikey='<apikey>',
+        url='https://gateway.watsonplatform.net/language-translator/api'
+        )
+        
+        # Identify the language with most confidence
+        language = lt.identify(
+        dict['lyrics']).get_result()['languages'][0]['language']
+        
+        # If not in English, translate to English
+        if language != 'en':
+            translation = lt.translate(
+                text=dict['lyrics'],
+                source=language,
+                target='en'
+            ).get_result()
+            lyrics = translation['translations'][0]['translation']
+            translated = True
+        else:
+            lyrics = dict['lyrics']
+            translated = False
+        
+        # Instantiating NLU
         natural_language_understanding = NaturalLanguageUnderstandingV1(
             version='2019-07-12',
-            iam_apikey='C4FEHaO1j6l1vi7qQuY4Abb7gwN4GCIjuyyVGJvVg1q1',
+            # Type your NLU service APIKEY below
+            iam_apikey='<apikey>',
             url='https://gateway.watsonplatform.net/natural-language-understanding/api'
         )
         
+        # Calling the service API
         response = natural_language_understanding.analyze(
-            text=dict['lyrics'],
+            text=lyrics,
             features=Features(
                 emotion=EmotionOptions(document=True),
-                sentiment=SentimentOptions(document=True))).get_result()
-        emotions = 'Anger: %.2f%%\nDisgust: %.2f%%\nFear: %.2f%%\nJoy: %.2f%%\nSadness: %.2f%%\nSentiment: %s (%.2f%%)'%(
-            response['emotion']['document']['emotion']['anger']*100, 
-            response['emotion']['document']['emotion']['disgust']*100,
-            response['emotion']['document']['emotion']['fear']*100, 
-            response['emotion']['document']['emotion']['joy']*100, 
-            response['emotion']['document']['emotion']['sadness']*100,
-            response['sentiment']['document']['label'],
-            abs(response['sentiment']['document']['score']*100)
+                sentiment=SentimentOptions(document=True)
             )
+        ).get_result()
+        
+        # Converting the response data into our api response
+        emotions = {
+            "anger": response['emotion']['document']['emotion']['anger']*100,
+            "disgust": response['emotion']['document']['emotion']['disgust']*100,
+            "fear": response['emotion']['document']['emotion']['fear']*100,
+            "joy": response['emotion']['document']['emotion']['joy']*100,
+            "sadness": response['emotion']['document']['emotion']['sadness']*100,
+            "sentiment": response['sentiment']['document']
+        }
         dict['emotions'] = emotions
         dict['err'] = False
+        dict['translated'] = translated
+        if translated:
+            dict['translatedLyrics'] = lyrics
     except:
         dict['err'] = True
-        dict['msg'] = 'Houve um erro ao analisar as letras de música.'
+        dict['msg'] = 'There was an error analyzing the song lyrics.'
     return dict

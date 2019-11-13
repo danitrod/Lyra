@@ -2,15 +2,21 @@ from urllib import request
 from bs4 import BeautifulSoup as BS
 
 def main(dict):
+    # Handling previous errors for sequence
     if dict['err']:
         return dict
     
-    page = request.urlopen(dict['url'])
-    soup = BS(page, 'html.parser')
-    
-    lbReplace = str(soup.find('div', attrs={'class': 'cnt-letra p402_premium'})).replace('<br/>','\n').replace('</p><p>', '\n\n').replace('<br>','\n').replace('<div class="cnt-letra p402_premium"> <p>','')
-    parse = BS(lbReplace, 'html.parser')
-    lyrics = parse.text.strip()
+    try:
+        # Call page and parse HTML
+        page = request.urlopen(dict['url'])
+        soup = BS(page, 'html.parser')
         
-    dict['lyrics'] = lyrics
+        # Scraping and adding line breaks instead of HTML tags
+        lyricsText = str(soup.find('div', attrs={'class': 'cnt-letra p402_premium'})).replace('<br/>','\n').replace('</p><p>', '\n\n').replace('<br>','\n').replace('<div class="cnt-letra p402_premium"> <p>','')
+        parse = BS(lyricsText, 'html.parser')
+        lyrics = parse.text.strip()
+        dict['lyrics'] = lyrics
+    except:
+        dict['err'] = True
+        dict['msg'] = "There was an unknown error processing your request."
     return dict

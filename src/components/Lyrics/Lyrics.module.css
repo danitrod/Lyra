@@ -1,9 +1,16 @@
+.Info {
+    color: #eee;
+    margin: 32px 0 0;
+    font-family: 'IBM Plex Sans', 'Courier New', Courier, monospace;
+    font-size: 16px;
+}
+
 .Lyrics {
     width: calc(100% - 128px);
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 32px 64px;
+    padding: 8px 64px;
 }
 
 .Lyrics p {

@@ -12,10 +12,6 @@ app.use(bodyParser.json())
 
 app.use(express.static(path.join(__dirname, "build")))
 
-app.post('/search', (req, res) => {
-    res.send({ search: req.body.value })
-})
-
 app.post('/lyrics', (req, res) => {
     request.post('https://76d95a1f.us-south.apiconnect.appdomain.cloud/608784ce-4f35-401c-abf5-4d3768b32179/lyrics', {
         headers: {
@@ -25,22 +21,17 @@ app.post('/lyrics', (req, res) => {
             ...req.body
         }
     }, (err, _, body) => {
-        if (err || body.err === true) console.error(err);
-        else {
-            request.post('https://us-south.functions.cloud.ibm.com/api/v1/web/danitrod%40ibm.com_dev/Lyra/analyseLyrics.json', {
-                json: {
-                    lyrics: body.lyrics.replace(/(\n)/g, ' ')
-                    // lyrics: body.lyrics
-                }
-            }, (err2, res2, body2) => {
-                if (err2) console.error(err2);
-                body.emotions = body2.emotions
-                // console.log(body2)
-                res.send(body);
+        if (err) {
+            console.error(err);
+            res.send({
+                err: true,
+                msg: "There was an internal server error processing your request."
             })
         }
+        else {
+            res.send(body);
+        }
     })
-    // res.send({ res: req.body })
 })
 
 app.get('*', (_, res) => {

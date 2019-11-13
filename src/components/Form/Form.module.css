@@ -1,5 +1,5 @@
 .Form {
-    margin-top: 32px;
+    margin: 32px 0;
     font-family: 'IBM Plex Sans', sans-serif;
     display: flex;
     flex-direction: column;
@@ -17,7 +17,7 @@
 .Form h3 {
     margin: 64px 0 0;
     color: #eee;
-    font-size: 20px;
+    font-size: 22px;
 }
 
 .Form input {
@@ -47,14 +47,6 @@
 
 .Form button:active {
     background-color: #888;
-}
-
-.Search {
-    margin: 8px 0 0;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-content: center;
 }
 
 .Query {
@@ -87,7 +79,7 @@
     align-self: flex-end;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 700px) {
     .Query {
         flex-direction: column;
     }
@@ -97,5 +89,8 @@
     }
     #song {
         margin-left: 0;
+    }
+    .Field {
+        margin-top: 16px;
     }
 }
