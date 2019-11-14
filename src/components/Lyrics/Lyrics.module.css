@@ -1,8 +1,51 @@
 .Info {
     color: #eee;
-    margin: 32px 0 0;
+    margin: 16px 0;
     font-family: 'IBM Plex Sans', 'Courier New', Courier, monospace;
     font-size: 16px;
+}
+
+.Buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+}
+
+.Inactive {
+    font-size: 14px;
+    background-color: #000;
+    color: #eee;
+    border: none;
+    border-radius: 2px;
+    width: 86px;
+    height: 38px;
+    cursor: pointer;
+}
+
+.Inactive:hover {
+    background-color: #222;
+}
+
+.Inactive:active {
+    background-color: #eee;
+    color: #3e3e3e;
+}
+
+.Active {
+    font-size: 14px;
+    border: none;
+    border-radius: 2px;
+    width: 86px;
+    height: 38px;
+    cursor: pointer;
+    background-color: #eee;
+    color: #3e3e3e;
+}
+
+#next {
+    margin: 0 0 0 16px;
 }
 
 .Lyrics {
@@ -26,9 +69,39 @@
     max-width: 512px;
 }
 
+.Anger {
+    color: #f00;
+}
+
+.Disgust {
+    color: #282;
+}
+
+.Fear {
+    color: #fff;
+}
+
+.Joy {
+    color: #ee7;
+}
+
+.Sadness {
+    color: #5af;
+}
+
+.Sentiment {
+    color: #ccc;
+}
+
 @media only screen and (max-width: 600px) {
     .Lyrics {
         width: calc(100% - 32px);
         padding: 32px 16px;
+    }
+    .Buttons {
+        flex-direction: column;
+    }
+    #next {
+        margin: 16px 0 0;
     }
 }

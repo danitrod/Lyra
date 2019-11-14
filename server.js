@@ -29,6 +29,7 @@ app.post('/lyrics', (req, res) => {
             })
         }
         else {
+            console.log(body);
             res.send(body);
         }
     })

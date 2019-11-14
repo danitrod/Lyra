@@ -39,6 +39,7 @@
     border-radius: 2px;
     margin: 0 0 0 16px;
     height: 38px;
+    cursor: pointer;
 }
 
 .Form button:hover {

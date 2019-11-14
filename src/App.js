@@ -4,6 +4,7 @@ import Form from './components/Form/Form';
 import Lyrics from './components/Lyrics/Lyrics';
 import Loading from './components/Loading/Loading';
 import WatsonImg from './images/watson.png';
+import Error from './components/Error/Error';
 
 function App() {
 
@@ -11,7 +12,15 @@ function App() {
     loading: false,
     err: false,
     errMsg: "",
-    data: null
+    // data: null
+    data: {
+      artist: "A",
+      song: "b",
+      lyrics: "d",
+      translated: true,
+      translatedLyrics: "c",
+      emotions: {}
+    }
   };
 
   const [state, setState] = useState(initialState);
@@ -28,15 +37,14 @@ function App() {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        artist,
-        song
+        artist: artist.trim(),
+        song: song.trim()
       })
     })
       .then(res => {
         return res.json()
       }).then(data => {
         if (data.err === true) {
-          console.log(data.msg);
           setState({
             ...state,
             err: true,
@@ -58,19 +66,31 @@ function App() {
       });
   };
 
-  return (
-    <div className="App">
-      <Form query={(artist, song) => onQueryClickHandler(artist, song)} />
-      <Lyrics
-        data={state.data}
-      />
-      <Loading loading={state.loading} />
-      <footer className={"Footer"}>
-        <h3>Powered by Watson™</h3>
-        <img src={WatsonImg} alt="watson logo" />
-      </footer>
-    </div>
-  );
+  const backButtonHandler = () => {
+    setState(initialState);
+  };
+
+  let screen;
+  // When there is an error, app will not be rendered (only error modal).
+  if (state.err === true) {
+    screen = <Error msg={state.errMsg} click={backButtonHandler} />
+  } else {
+    screen = (
+      <div className="App">
+        <Form query={(artist, song) => onQueryClickHandler(artist, song)} />
+        <Lyrics
+          data={state.data}
+        />
+        <Loading loading={state.loading} />
+        <footer className={"Footer"}>
+          <h3>Powered by Watson™</h3>
+          <img src={WatsonImg} alt="watson logo" />
+        </footer>
+      </div>
+    );
+  };
+
+  return screen;
 };
 
 export default App;

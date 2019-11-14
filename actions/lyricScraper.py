@@ -17,6 +17,6 @@ def main(dict):
         lyrics = parse.text.strip()
         dict['lyrics'] = lyrics
     except:
+        dict['msg'] = 'There was an unknown error processing your request.'
         dict['err'] = True
-        dict['msg'] = "There was an unknown error processing your request."
     return dict
