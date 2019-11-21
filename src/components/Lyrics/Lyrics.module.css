@@ -48,25 +48,14 @@
     margin: 0 0 0 16px;
 }
 
-.Lyrics {
-    width: calc(100% - 128px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 8px 64px;
-}
-
-.Lyrics p {
+.Content p {
     color: #eee;
-    margin: 0;
+    margin: 16px 0 0;
     font-size: 16px;
     font-family: 'IBM Plex Sans', 'Courier New', Courier, monospace;
     text-align: left;
-    height: 256px;
-    overflow-y: scroll;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    padding: 8px;
-    max-width: 512px;
+    padding: 32px;
+    max-width: 720px;
 }
 
 .Anger {
@@ -94,10 +83,6 @@
 }
 
 @media only screen and (max-width: 600px) {
-    .Lyrics {
-        width: calc(100% - 32px);
-        padding: 32px 16px;
-    }
     .Buttons {
         flex-direction: column;
     }

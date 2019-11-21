@@ -6,7 +6,7 @@
 
 # Lyra, the song analyzer
 
-Lyra makes use of the Watson Natural Language Understanding API to analyze song lyrics. The backend calls a serverless function sequence that scrapes song lyrics from https://www.letras.com and then calls NLU to analyze the song's emotion and sentiment.
+Lyra makes use of the Watson Natural Language Understanding (NLU) API to analyze song lyrics. The backend calls a serverless function sequence that scrapes song lyrics from https://www.letras.com using Beautiful Soup and then calls NLU to analyze the song's emotion and sentiment.
 
 <!-- ## Index
 

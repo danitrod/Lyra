@@ -1,54 +1,16 @@
-import React, { Fragment, useState } from 'react'
+import React from 'react'
 import classes from './Lyrics.module.css'
 
 const Lyrics = (props) => {
-
-    const initialState = {
-        showLyrics: false,
-        showAnalysis: false,
-        showTranslation: false
-    };
-
-    const [state, setState] = useState(initialState);
-
-    const showLyricsHandler = () => {
-        if (state.showAnalysis === false && state.showTranslation === false) {
-            const updatedState = !state.showLyrics;
-            setState({
-                ...state,
-                showLyrics: updatedState
-            });
-        };
-    };
-
-    const showAnalysisHandler = () => {
-        if (state.showLyrics === false && state.showTranslation === false) {
-            const updatedState = !state.showAnalysis;
-            setState({
-                ...state,
-                showAnalysis: updatedState
-            });
-        };
-    };
-
-    const showTranslationHandler = () => {
-        if (state.showLyrics === false && state.showAnalysis === false) {
-            const updatedState = !state.showTranslation;
-            setState({
-                ...state,
-                showTranslation: updatedState
-            });
-        };
-    };
 
     // Component will exist only when lyrics are present
     let content = null;
     if (props.data !== null) {
 
         let buttons, lyrics, analysis, translatedLyrics;
-        const lyricsButton = <button onClick={showLyricsHandler} className={state.showLyrics === true ? classes.Active : classes.Inactive}>Lyrics</button>
-        const analysisButton = <button id={classes.next} onClick={showAnalysisHandler} className={state.showAnalysis === true ? classes.Active : classes.Inactive}>Analysis</button>
-        const translationButton = <button id={classes.next} onClick={showTranslationHandler} className={state.showTranslation === true ? classes.Active : classes.Inactive}>Translation</button>
+        const lyricsButton = <button onClick={() => props.showContent('lyrics')} className={props.content === 'lyrics' ? classes.Active : classes.Inactive}>Lyrics</button>
+        const analysisButton = <button id={classes.next} onClick={() => props.showContent('analysis')} className={props.content === 'analysis' ? classes.Active : classes.Inactive}>Analysis</button>
+        const translationButton = <button id={classes.next} onClick={() => props.showContent('translation')} className={props.content === 'translation' ? classes.Active : classes.Inactive}>Translation</button>
         // Manage content with buttons altering state
         if (props.data.translated === true) {
             buttons = (
@@ -67,21 +29,19 @@ const Lyrics = (props) => {
             );
         };
 
-        if (state.showLyrics === true) {
+        if (props.content === 'lyrics') {
             lyrics = (
                 <div className={classes.Content}>
-                    <div className={classes.Lyrics}>
-                        <p>
-                            {props.data.lyrics.split('\n').map(line => {
-                                return <>{line}<br /></>;
-                            })}
-                        </p>
-                    </div>
+                    <p>
+                        {props.data.lyrics.split('\n').map(line => {
+                            return <>{line}<br /></>;
+                        })}
+                    </p>
                 </div>
             );
         } else lyrics = null;
 
-        if (state.showAnalysis === true) {
+        if (props.content === 'analysis') {
             analysis = (
                 <div className={classes.Content}>
                     <p>
@@ -93,22 +53,24 @@ const Lyrics = (props) => {
                                 value = props.data.emotions[`${key}`].toFixed(2) + '%';
                             }
                             return (
-                                <Fragment>
+                                <>
                                     <span className={classes[`${key}`]}>{key}</span>: {value}<br />
-                                </Fragment>);
+                                </>);
                         })}
                     </p>
                 </div>
             );
         } else analysis = null;
 
-        if (state.showTranslation === true) {
+        if (props.content === 'translation') {
             translatedLyrics = (
-                <p>
-                    {props.data.translatedLyrics.split('\n').map(line => {
-                        return <>{line}<br /></>;
-                    })}
-                </p>
+                <div className={classes.Content}>
+                    <p>
+                        {props.data.translatedLyrics.split('\n').map(line => {
+                            return <>{line}<br /></>;
+                        })}
+                    </p>
+                </div>
             );
         } else translatedLyrics = null;
 

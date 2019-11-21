@@ -12,15 +12,8 @@ function App() {
     loading: false,
     err: false,
     errMsg: "",
-    // data: null
-    data: {
-      artist: "A",
-      song: "b",
-      lyrics: "d",
-      translated: true,
-      translatedLyrics: "c",
-      emotions: {}
-    }
+    data: null,
+    showContent: false
   };
 
   const [state, setState] = useState(initialState);
@@ -70,22 +63,48 @@ function App() {
     setState(initialState);
   };
 
+  const contentButtonHandler = (content) => {
+    const showContent = state.showContent === content ? false : content;
+    const newState = {
+      ...state,
+      showContent
+    }
+    setState(newState);
+  }
+
   let screen;
   // When there is an error, app will not be rendered (only error modal).
   if (state.err === true) {
     screen = <Error msg={state.errMsg} click={backButtonHandler} />
   } else {
-    screen = (
-      <div className="App">
-        <Form query={(artist, song) => onQueryClickHandler(artist, song)} />
+    let content;
+    if (state.showContent !== false) {
+      content = (
         <Lyrics
           data={state.data}
+          content={state.showContent}
+          showContent={contentButtonHandler}
         />
-        <Loading loading={state.loading} />
-        <footer className={"Footer"}>
-          <h3>Powered by Watson™</h3>
-          <img src={WatsonImg} alt="watson logo" />
-        </footer>
+      )
+    } else {
+      content = (
+        <>
+          <Form query={(artist, song) => onQueryClickHandler(artist, song)} />
+          <Lyrics
+            data={state.data}
+            showContent={contentButtonHandler}
+          />
+          <Loading loading={state.loading} />
+          <footer className={"Footer"}>
+            <h3>Powered by Watson™</h3>
+            <img src={WatsonImg} alt="watson logo" />
+          </footer>
+        </>
+      );
+    }
+    screen = (
+      <div className="App">
+        {content}
       </div>
     );
   };
