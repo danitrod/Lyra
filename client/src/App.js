@@ -46,7 +46,6 @@ function App() {
           })
         }
         else {
-          console.log('response:', data)
           setState({
             ...state,
             data,
@@ -99,6 +98,7 @@ function App() {
             <h3>Powered by Watson™</h3>
             <img src={WatsonImg} alt="watson logo" />
           </footer>
+          <p className="reference">Lyrics from <a href="https://letras.com/" target="_blank" rel="noopener noreferrer">https://letras.com/</a></p>
         </>
       );
     }

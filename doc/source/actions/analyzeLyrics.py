@@ -53,12 +53,12 @@ def main(dict):
         
         # Converting the response data into our api response
         emotions = {
-            "anger": response['emotion']['document']['emotion']['anger']*100,
-            "disgust": response['emotion']['document']['emotion']['disgust']*100,
-            "fear": response['emotion']['document']['emotion']['fear']*100,
-            "joy": response['emotion']['document']['emotion']['joy']*100,
-            "sadness": response['emotion']['document']['emotion']['sadness']*100,
-            "sentiment": response['sentiment']['document']
+            "Anger": response['emotion']['document']['emotion']['anger']*100,
+            "Disgust": response['emotion']['document']['emotion']['disgust']*100,
+            "Fear": response['emotion']['document']['emotion']['fear']*100,
+            "Joy": response['emotion']['document']['emotion']['joy']*100,
+            "Sadness": response['emotion']['document']['emotion']['sadness']*100,
+            "Sentiment": response['sentiment']['document']
         }
         dict['emotions'] = emotions
         dict['err'] = False

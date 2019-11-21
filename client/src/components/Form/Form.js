@@ -28,7 +28,6 @@ class Form extends Component {
         return (
             <div className={classes.Form}>
                 <h1>Lyra, the song analyzer</h1>
-                <h3>Query for lyric analysis!</h3>
                 <div className={classes.Query}>
                     <div className={classes.Field}>
                         <h4>Artist</h4>

@@ -1,0 +1,10 @@
+---
+applications:
+- name: danitrod-lyra
+  path: .
+  memory: 128M
+  command: node server.js
+  routes:
+  - route: lyra.mybluemix.net
+  instances: 1
+  random-route: true

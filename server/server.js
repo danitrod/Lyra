@@ -13,7 +13,8 @@ app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, "build")))
 
 app.post('/lyrics', (req, res) => {
-    request.post('https://76d95a1f.us-south.apiconnect.appdomain.cloud/608784ce-4f35-401c-abf5-4d3768b32179/lyrics', {
+    // Insert your API Connect URL below
+    request.post('', {
         headers: {
             'Content-Type': 'application/json'
         },
@@ -29,7 +30,6 @@ app.post('/lyrics', (req, res) => {
             })
         }
         else {
-            console.log(body);
             res.send(body);
         }
     })
