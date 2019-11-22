@@ -14,10 +14,10 @@
   "scripts": {
     "start": "react-scripts start",
     "serve": "node ../server/server.js",
-    "build": "react-scripts build",
+    "build": "react-scripts build && cd .. && rm -rf server/build && mv client/build server",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "npm run build && cd .. && rm -rf server/build && mv client/build server && cd server && ibmcloud cf push"
+    "deploy": "npm run build && cd ../server && ibmcloud cf push"
   },
   "eslintConfig": {
     "extends": "react-app"

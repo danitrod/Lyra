@@ -3,7 +3,7 @@ import './App.css';
 import Form from './components/Form/Form';
 import Lyrics from './components/Lyrics/Lyrics';
 import Loading from './components/Loading/Loading';
-import WatsonImg from './images/watson.png';
+import WatsonImg from './images/watson.jpg';
 import Error from './components/Error/Error';
 
 function App() {
