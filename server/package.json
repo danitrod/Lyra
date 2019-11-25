@@ -19,6 +19,7 @@
     },
     "scripts": {
         "start": "node server.js",
+        "install-deps": "npm install && cd ../client && npm install",
         "build": "cd ../client && npm run build",
         "deploy": "npm run build && ibmcloud cf push",
         "local": "npm run build && npm start",
