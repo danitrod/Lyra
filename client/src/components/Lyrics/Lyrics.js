@@ -48,7 +48,7 @@ const Lyrics = (props) => {
                         {Object.keys(props.data.emotions).map(key => {
                             let value;
                             if (key === 'Sentiment') {
-                                value = props.data.emotions[`${key}`].label + ' (' + ((100 * Math.abs(props.data.emotions[`${key}`].score)).toFixed(2)).toString() + ')%';
+                                value = props.data.emotions[`${key}`].label + ' (' + ((100 * Math.abs(props.data.emotions[`${key}`].score)).toFixed(2)).toString() + '%)';
                             } else {
                                 value = props.data.emotions[`${key}`].toFixed(2) + '%';
                             }
