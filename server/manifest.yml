@@ -1,10 +1,9 @@
 ---
 applications:
-- name: danitrod-lyra
+- name: <your app name>
   path: .
   memory: 128M
   command: node server.js
   routes:
-  - route: lyra.mybluemix.net
+  - route: <your app route>.mybluemix.net
   instances: 1
-  random-route: true

@@ -10,10 +10,12 @@ Lyra makes use of the Watson Natural Language Understanding (NLU) API to analyze
 
 Check the app out on https://lyra.mybluemix.net.
 
-<!-- ## Index
+## Index
 
-* [1. Run local](#1-introdução)
-* [2. Deploy](#2-deploy) -->
+* [Flow](#Flow)
+* [Set up](#Creating-the-Serverless-sequence-and-actions-via-IBM-Cloud-Functions-GUI)
+* [Run locally](#Running-the-app-locally)
+* [Deploy](#Deploying-the-app-to-the-cloud)
 
 ## Flow
 ![flow](doc/source/images/flow.png)
@@ -33,12 +35,28 @@ If you don't have the apikeys, simply create a free instance of [Language Transl
 Go to the [Functions API management section](https://cloud.ibm.com/functions/apimanagement) and create a Managed API. Name it whatever you like. Go to your newly created Managed API and go to the section `Definition`. There, create an operation, give it a path, set the method to `POST` and select your sequence. After creating the operation, remember to scroll down the screen and click on `Save` to save your changes. Now, go back to `Summary` and copy the route on the screen to your API. Insert this route in the [server file](./server/server.js), line 16 and add a `/<your path name>` to the end of the route. Your server should now be able to connect to your API operation.
 
 ## Running the app locally
-Simpy clone the repo, put your API route in the server file (step above) and run the following commands:
+Simpy clone the repo, put your API route in the server file (step above) and run the following commands from the root directory:
 
 ```
-cd client && npm install && cd ../server
+# Installs dependencies
+cd client && npm install && cd ../server npm install
 
-npm install
-
+# Builds app and runs locally
 npm run local
+```
+
+## Deploying the app to the cloud
+NOTE: You must have the [IBM Cloud Command Line Interface](https://cloud.ibm.com/docs/cli?topic=cloud-cli-getting-started) installed in your machine to follow the next steps.
+
+After [setting up](#Creating-the-Serverless-sequence-and-actions-via-IBM-Cloud-Functions-GUI) and making sure the app is working, go to the `/server` directory, change your app and route names on the [manifest file](./server/manifest.yml) (lines 3 and 8) and run the following commands:
+
+```
+# Logs into the IBM Cloud
+ibmcloud login
+
+# Selects a Cloud Foundry organization and space to deploy your app
+ibmcloud target --cf
+
+# Builds the client and deploys app to cloud
+npm run deploy
 ```

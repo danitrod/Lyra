@@ -21,7 +21,7 @@
         "start": "node server.js",
         "build": "cd ../client && npm run build",
         "deploy": "npm run build && ibmcloud cf push",
-        "local": "npm run build && concurrently \"npm start\" \"cd ../client && npm start\"",
+        "local": "npm run build && npm start",
         "dev": "concurrently \"nodemon server.js\" \"cd ../client && npm start\""
     }
 }
