@@ -14,7 +14,7 @@ app.use(express.static(path.join(__dirname, "build")))
 
 app.post('/lyrics', (req, res) => {
     // Insert your API Connect URL below
-    request.post('', {
+    request.post('<your url>', {
         headers: {
             'Content-Type': 'application/json'
         },

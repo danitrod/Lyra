@@ -7,7 +7,8 @@ const Error = (props) => {
             <h1>Error</h1>
             <p>{props.msg}</p>
             <button className={classes.back} onClick={props.click}>Back</button>
-        </div>)
+        </div>
+    );
 }
 
 export default Error
