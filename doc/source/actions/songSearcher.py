@@ -9,35 +9,42 @@ def fuzzy(match, phrases):
     for phrase in phrases:
         # Compare each letter between the parameter and the expected for each word
         words = phrase.lower().split(' ', len(wordMatches)-1)
-        count = 0
+        phraseCount = 0
         for i in range(len(words)):
-            for j in range(len(words[i])):
-                # Compare the letter from the current word with the previous, same and next position letter from the matching word
-                if j >= len(wordMatches[i]):
-                    break
-                if words[i][j] == wordMatches[i][j]:
-                    count += 1
-                if j < len(wordMatches[i])-1:
-                    if words[i][j] == wordMatches[i][j+1]:
-                        count += 1
-                if j > 0:
-                    if words[i][j] == wordMatches[i][j-1]:
-                        count += 1
-
-            if len(words[i]) > 4 and len(wordMatches[i]) > 4:
-                # Extra points to equal groups of 4 letters in the actual, previous or next position
-                for j in range(0, len(words[i])-4):
-                    if j > len(wordMatches[i])-4:
+            # try for every word
+            maxCount = 0
+            for j in range(len(wordMatches)):
+                count = 0
+                for k in range(len(words[i])):
+                    # Compare the letter from the current word with the previous, same and next position letter from the matching word
+                    if k >= len(wordMatches[j]):
                         break
-                    if j+1 <= len(wordMatches[i])-4:
-                        if words[i][j:j+4] == wordMatches[i][j+1:j+5]:
-                            count += 2
-                    if j-1 >= 0:
-                        if words[i][j:j+4] == wordMatches[i][j-1:j+3]:
-                            count += 2
-                    if words[i][j:j+4] == wordMatches[i][j:j+4]:
-                        count += 4
-        ratios[phrase] = count
+                    if words[i][k] == wordMatches[j][k]:
+                        count += 1
+                    if k < len(wordMatches[j])-1:
+                        if words[i][k] == wordMatches[j][k+1]:
+                            count += 1
+                    if k > 0:
+                        if words[i][k] == wordMatches[j][k-1]:
+                            count += 1
+
+                if len(words[i]) > 4 and len(wordMatches[j]) > 4:
+                    # Extra points to equal groups of 4 letters in the actual, previous or next position
+                    for k in range(0, len(words[i])-4):
+                        if k > len(wordMatches[j])-4:
+                            break
+                        if k+1 <= len(wordMatches[j])-4:
+                            if words[i][k:k+4] == wordMatches[j][k+1:k+5]:
+                                count += 2
+                        if k-1 >= 0:
+                            if words[i][k:k+4] == wordMatches[j][k-1:k+3]:
+                                count += 2
+                        if words[i][k:k+4] == wordMatches[j][k:k+4]:
+                            count += 4
+                if count > maxCount:
+                    maxCount = count
+            phraseCount += maxCount
+        ratios[phrase] = phraseCount
     # Returning sorted list
     results = [[k, v] for k, v in ratios.items() if v > len(match)/2]
     results.sort(key=lambda x: x[1], reverse=True)
