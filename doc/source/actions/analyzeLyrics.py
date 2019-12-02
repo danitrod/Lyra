@@ -1,4 +1,3 @@
-import json
 from watson_developer_cloud import NaturalLanguageUnderstandingV1, LanguageTranslatorV3
 from watson_developer_cloud.natural_language_understanding_v1 import Features, EmotionOptions, SentimentOptions
 
@@ -37,7 +36,7 @@ def main(dict):
         # Instantiating NLU
         natural_language_understanding = NaturalLanguageUnderstandingV1(
             version='2019-07-12',
-            # Type your NLU service APIKEY below
+            # Insert your NLU service APIKEY below
             iam_apikey='<apikey>',
             url='https://gateway.watsonplatform.net/natural-language-understanding/api'
         )
